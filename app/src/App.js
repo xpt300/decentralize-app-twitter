@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { ethers } from "ethers";
 import './App.css';
 import abi from './utils/WavePortal.json'
+import moment from 'moment';
 
 export default function App() {
-  /*
-   * Just a state variable we use to store our user's public wallet.
-   */
+  const [inputFocus, setInputFocus] = useState(false)
   const [currentAccount, setCurrentAccount] = useState("");
   const [message, setMessage] = useState("");
   const [allWaves, setAllWaves] = useState([]);
@@ -155,45 +154,58 @@ const getAllWaves = async () => {
     checkIfWalletIsConnected();
   }, [])
 
+  console.log(currentAccount)
+
   return (
     <div className="mainContainer">
 
       <div className="dataContainer">
 
-      {!currentAccount && (
+      {!currentAccount ? 
           <button className="waveButton" onClick={connectWallet}>
-            Connect Wallet
+            Connecter votre Wallet
           </button>
-        )}
+          : <div className='connected'>Vous êtes connectés</div>
+        }
         <div className="header">
-          Send a message
+          Envoyer un message sur le réseau Rinkeby
         </div>
 
         <div className="bio">
-         Send Maxime a public message on the blockchain!
+         Envoyer un message publique à <a href="https://github.com/xpt300" className="link">Maxime</a>. Ceci est une app de test pour apprendre à créer un "smart contract".
         </div>
 
-         <input type="textarea" 
+         <textarea rows="4"
          className="textArea"
-         placeholder="Your message"
+         placeholder="Ton message"
+         onFocus={() => setInputFocus(true)}
+         onBlur={() => setInputFocus(false)}
+         style={{borderColor: inputFocus && message.length > 280 ? '#F32013' : inputFocus ? '#63b3ed' : 'white'}}
           value={message}
           onChange={(message) => setMessage(message.target.value)}
         />
+        <div className="boxLength">
+          <p className="length"><span style={{color: message.length <= 280 ? "white" : "#F32013"}}>{message.length}</span> / 280</p>
+        </div>
 
-        <button className="waveButton" onClick={wave} style={{width: "150px"}}>
+        <button className={message.length > 280 || message.length === 0 ? "disabledSendButton" : "sendButton"} onClick={wave} disabled={message.length > 280 || message.length === 0}>
           Send
         </button>
 
-        
-
+            <div className="table" style={{ marginTop: "16px", padding: "8px" }}>
+              <div className="tableHeading">WALLET</div>
+              <div className="tableHeading">MESSAGE</div>
+              <div className="tableHeading">DATE</div>
         {allWaves.map((wave, index) => {
           return (
-            <div key={index} style={{ backgroundColor: "OldLace", marginTop: "16px", padding: "8px" }}>
-              <div>Address: {wave.address}</div>
-              <div>Time: {wave.timestamp.toString()}</div>
-              <div>Message: {wave.message}</div>
-            </div>)
+            <Fragment key={index}>
+                <div className="tableMessage">{wave.address.slice(0, 4)}...{wave.address.substr(wave.address.length - 2)}</div>
+                <div className="tableMessage">{wave.message}</div>
+                <div className="tableMessage">{moment(wave.timestamp.toString()).format('MM/DD/YYYY, HH:mm:ss')}</div>
+            </Fragment>
+          )
         })}
+    </div>
       </div>
     </div>
   );
