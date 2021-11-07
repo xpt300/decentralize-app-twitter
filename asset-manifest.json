@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/dapp-twitter/static/css/main.72030115.chunk.css",
+    "main.js": "/dapp-twitter/static/js/main.25c06fc5.chunk.js",
+    "main.js.map": "/dapp-twitter/static/js/main.25c06fc5.chunk.js.map",
+    "runtime-main.js": "/dapp-twitter/static/js/runtime-main.6521a9fe.js",
+    "runtime-main.js.map": "/dapp-twitter/static/js/runtime-main.6521a9fe.js.map",
+    "static/js/2.20b04905.chunk.js": "/dapp-twitter/static/js/2.20b04905.chunk.js",
+    "static/js/2.20b04905.chunk.js.map": "/dapp-twitter/static/js/2.20b04905.chunk.js.map",
+    "index.html": "/dapp-twitter/index.html",
+    "precache-manifest.9e7e8287f80b3cba54efdd587b2b846d.js": "/dapp-twitter/precache-manifest.9e7e8287f80b3cba54efdd587b2b846d.js",
+    "service-worker.js": "/dapp-twitter/service-worker.js",
+    "static/css/main.72030115.chunk.css.map": "/dapp-twitter/static/css/main.72030115.chunk.css.map"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6521a9fe.js",
+    "static/js/2.20b04905.chunk.js",
+    "static/css/main.72030115.chunk.css",
+    "static/js/main.25c06fc5.chunk.js"
+  ]
+}
